@@ -8,5 +8,8 @@ TALOS_ISO_NAME				:= talos-$(TALOS_VERSION)-$(TALOS_PLATFORM)-$(ARCH).iso
 TALOS_ISO					:= $(IMAGES_DIR)/$(TALOS_ISO_NAME)
 
 $(TALOS_ISO): $(IMAGES_DIR)
-	$(call message,📥,Downloading Talos Linux ISO version,$(TALOS_VERSION),to,$(TALOS_ISO))
+	$(call message,📥,Downloading Talos Linux ISO version $(hl)$(TALOS_VERSION)$(rs) to $(hl)$(TALOS_ISO)$(rs))
 	curl -fSLo "$(TALOS_ISO)" "$(TALOS_ISO_URL)"
+
+.PHONY: talos/iso
+talos/iso: $(TALOS_ISO)

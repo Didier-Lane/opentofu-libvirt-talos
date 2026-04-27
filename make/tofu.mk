@@ -2,7 +2,7 @@ PROJECT_NAME			?= opentofu-libvirt-talos
 AWS_DEFAULT_REGION		?= eu-west-3
 AWS_ENDPOINT_URL_S3		?= https://localhost:9000
 IMAGES_STORAGE_PATH		?= $(abspath $(CURDIR)/images)
-NUM_NODES				?= 1
+NUM_NODES				?= 2
 NODES_PREFIX			?= node-
 NODES_VCPUS				?= 2
 NODES_MEMORY			?= 4096
@@ -46,7 +46,7 @@ terraform.tfvars:
 	tofu fmt -recursive 1> /dev/null
 
 .PHONY: tofu/%
-tofu/%:	$(TALOS_ISO) terraform.tfvars # 🧈 Executes an OpenTofu command
+tofu/%:	talos/iso terraform.tfvars # 🧈 Executes an OpenTofu command
 	args=($(subst tofu/,,$@) $(ARGS))
 	[[ "$${args[1]}" =~ "apply|destroy" ]] && args+=("-auto-approve") || true
 	tofu "$${args[@]}"
