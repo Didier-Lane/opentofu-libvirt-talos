@@ -14,9 +14,6 @@ CONTROL_PLANE_URL			:= https://$(CONTROL_PLANE_IP):6443
 CLUSTER_NAME				?= sandbox
 KUBERNETES_VERSION			?= 1.35.3
 KUBECONFIG					?= $(TALOS_CONFIG_DIR)/kubeconfig
-TLS_CA_CRT					?= ~/.ssl/DidierLane/CA.crt
-PROXIED_REGISTRIES			?= docker.io gcr.io ghcr.io registry.k8s.io quay.io
-REGISTRY_PROXY_URL			?= http://$(NETWORK_GATEWAY):3128/
 
 .PHONY: talos/ready
 talos/ready: talosctl
