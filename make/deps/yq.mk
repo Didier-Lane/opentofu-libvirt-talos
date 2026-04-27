@@ -12,3 +12,7 @@ $(YQ_BIN): $(BIN_DIR)
 
 .PHONY: yq
 yq: $(YQ_BIN)
+
+.PHONY: yq/check
+yq/check: jq
+	$(call github_check_release_version,$(YQ_REPOSITORY),$(YQ_VERSION),$(YQ_ASSET))
