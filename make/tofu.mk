@@ -1,7 +1,5 @@
-PROJECT_NAME			?= opentofu-sandbox
+PROJECT_NAME			?= opentofu-libvirt-talos
 AWS_DEFAULT_REGION		?= eu-west-3
-AWS_ACCESS_KEY_ID		?= FR5,85DcV!hKaDqw8;l6
-AWS_SECRET_ACCESS_KEY	?= V*Mi(?ggs84L,TY*iRvF
 AWS_ENDPOINT_URL_S3		?= https://localhost:9000
 IMAGES_STORAGE_PATH		?= $(abspath $(CURDIR)/images)
 NUM_NODES				?= 1

@@ -1,17 +1,4 @@
-# https://factory.talos.dev/
-# https://factory.talos.dev/?arch=amd64&bootloader=grub&cmdline-set=true&extensions=-&extensions=siderolabs%2Fqemu-guest-agent&platform=nocloud&target=cloud&version=1.12.5
-TALOS_FACTORY_URL			:= https://factory.talos.dev/image
-TALOS_FACTORY_ID			?= 3cbe47354d9e61120789577b809fd5738aa607b0afbab74abb10216a4da57903
-TALOS_VERSION				?= v1.12.5
-TALOS_PLATFORM				?= nocloud
-TALOS_ISO_URL				:= $(TALOS_FACTORY_URL)/$(TALOS_FACTORY_ID)/$(TALOS_VERSION)/$(TALOS_PLATFORM)-$(ARCH).iso
-TALOS_ISO_NAME				:= talos-$(TALOS_VERSION)-$(TALOS_PLATFORM)-$(ARCH).iso
-TALOS_ISO					:= $(LOCAL_IMAGES_PATH)/$(TALOS_ISO_NAME)
-
-# https://github.com/siderolabs/talos/releases/download/v1.12.5/talosctl-linux-amd64
-TALOSCTL_RELEASES			:= https://github.com/siderolabs/talos/releases
-TALOSCTL_URL				:= $(TALOSCTL_RELEASES)/download/$(TALOS_VERSION)/talosctl-linux-$(ARCH)
-TALOSCTL					:= $(LOCAL_BIN_PATH)/talosctl
+TALOS_VERSION				?= v1.12.6
 TALOS_CONFIG_DIR			?= .talos
 TALOSCONFIG					:= $(TALOS_CONFIG_DIR)/talosconfig
 NODES_HOSTNAMES				:= $(shell for i in {1..$(NUM_NODES)}; do echo "$(NODES_PREFIX)$${i}"; done)
@@ -26,21 +13,12 @@ WORKERS_CIDRS				:= $(strip $(subst $(CONTROL_PLANE_CIDR),,$(NODES_CIDRS)))
 CONTROL_PLANE_URL			:= https://$(CONTROL_PLANE_IP):6443
 CLUSTER_NAME				?= sandbox
 KUBECONFIG					?= $(TALOS_CONFIG_DIR)/kubeconfig
-TLS_CA_CRT					?= ~/.ssl/local.io/CA.crt
+TLS_CA_CRT					?= ~/.ssl/DidierLane/CA.crt
 PROXIED_REGISTRIES			?= docker.io gcr.io ghcr.io registry.k8s.io quay.io
 REGISTRY_PROXY_URL			?= http://$(NETWORK_GATEWAY):3128/
 
-$(TALOS_ISO): $(LOCAL_IMAGES_PATH)
-	$(call message,📥,Downloading Talos Linux ISO version,$(TALOS_VERSION),to,$(TALOS_ISO))
-	curl -fSLo $(TALOS_ISO) $(TALOS_ISO_URL)
-
-$(TALOSCTL): $(LOCAL_BIN_PATH)
-	$(call message,📥,Downloading TalosCTL version,$(TALOS_VERSION),to,$(TALOSCTL))
-	curl -fSLo $(TALOSCTL) $(TALOSCTL_URL)
-	chmod +x $(TALOSCTL)
-
 .PHONY: talos/ready
-talos/ready: $(TALOSCTL)
+talos/ready: $(TALOSCTL_BIN)
 	for ip in $(NODES_IPS); do
 		$(call message,🌐,Trying to reach node,$${ip})
 		n=1; delay=5; max_attempts=6

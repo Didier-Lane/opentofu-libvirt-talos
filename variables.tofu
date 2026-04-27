@@ -1,6 +1,6 @@
 variable "project_name" {
   type    = string
-  default = "opentofu-sandbox"
+  default = "opentofu-libvirt-talos"
 }
 
 variable "nodes_prefix" {
