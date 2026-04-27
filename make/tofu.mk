@@ -1,6 +1,4 @@
 PROJECT_NAME			?= opentofu-libvirt-talos
-AWS_DEFAULT_REGION		?= eu-west-3
-AWS_ENDPOINT_URL_S3		?= https://localhost:9000
 IMAGES_STORAGE_PATH		?= $(abspath $(CURDIR)/images)
 NUM_NODES				?= 2
 NODES_PREFIX			?= node-
