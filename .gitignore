@@ -1,4 +1,5 @@
 .terraform/
+images/
 terraform.tfstate*
 *.tfvars
 .talos
