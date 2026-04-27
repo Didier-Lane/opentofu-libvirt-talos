@@ -3,6 +3,11 @@ variable "project_name" {
   default = "opentofu-libvirt-talos"
 }
 
+variable "bucket_name" {
+  type    = string
+  default = "opentofu-libvirt-talos"
+}
+
 variable "nodes_prefix" {
   type    = string
   default = "node-"

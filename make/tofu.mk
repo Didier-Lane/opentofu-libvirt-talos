@@ -15,6 +15,7 @@ NAMESERVERS				?= 1.1.1.1 1.0.0.1 8.8.8.8
 terraform.tfvars:
 	cat <<EOF > terraform.tfvars
 	project_name = "$(PROJECT_NAME)"
+	bucket_name = "$(AWS_BUCKET_NAME)"
 	nodes_prefix = "$(NODES_PREFIX)"
 	talos_iso = {
 		name = "$(TALOS_ISO_NAME)"
