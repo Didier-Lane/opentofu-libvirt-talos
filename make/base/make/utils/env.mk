@@ -1,5 +1,5 @@
 define env_vars
-grep -hEo '^([A-Z\_]+)\s*(\?|!|::|:::)=' $(MAKEFILE_LIST) | sed 's/\s*[?!:]*=.*//g' | sort -d
+grep -hEo '^([^\?!::\s]+)\s*(\?|!|::|:::)=' $(MAKEFILE_LIST) | sed 's/\s*[?!:]*=.*//g' | sort -d
 endef
 
 .env:
