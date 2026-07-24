@@ -7,7 +7,8 @@ if [[ "$${latest}" == "$(2)" ]]; then
 else
 	$(call message,💡,Repository $(hl)$(1)$(rs) new version is $(hl)$${latest}$(rs))
 	if [ ! -z "$(3)" ]; then
-		for asset in $(3); do
+		assets=($$( jq -r '.assets[] | select(.name | contains("$(3)") ) | .name' < "$${cache}" ))
+		for asset in $${assets}; do
 			digest="$$( jq -r '.assets[] | select(.name == "'"$${asset}"'") | .digest' < "$${cache}" )"
 			$(call message,📦,Asset $(hl)$${asset}$(rs) digest is $(hl)$${digest}$(rs))
 		done
