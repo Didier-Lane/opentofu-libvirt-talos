@@ -1,4 +1,4 @@
-TALOS_VERSION				?= v1.12.7
+TALOS_VERSION				?= v1.13.7
 TALOS_CONFIG_DIR			?= .talos
 TALOSCONFIG					:= $(TALOS_CONFIG_DIR)/talosconfig
 NODES_HOSTNAMES				:= $(shell for i in {1..$(NUM_NODES)}; do echo "$(NODES_PREFIX)$${i}"; done)
@@ -12,7 +12,7 @@ CONTROL_PLANE_CIDR			:= $(firstword $(NODES_CIDRS))
 WORKERS_CIDRS				:= $(strip $(subst $(CONTROL_PLANE_CIDR),,$(NODES_CIDRS)))
 CONTROL_PLANE_URL			:= https://$(CONTROL_PLANE_IP):6443
 CLUSTER_NAME				?= sandbox
-KUBERNETES_VERSION			?= 1.35.3
+KUBERNETES_VERSION			?= 1.36.3
 KUBECONFIG					?= $(TALOS_CONFIG_DIR)/kubeconfig
 
 .PHONY: talos/ready

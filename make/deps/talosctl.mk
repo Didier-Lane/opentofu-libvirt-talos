@@ -1,6 +1,6 @@
 # https://github.com/siderolabs/talos/releases/download/v1.12.5/talosctl-linux-amd64
 TALOSCTL_REPOSITORY			:= siderolabs/talos
-TALOSCTL_DIGEST				?= sha256:9f2626b4755cbd72401cacdf1812878ae6d738b8355c9e8d3600ecebb39a02ca
+TALOSCTL_DIGEST				?= sha256:97d08e5584e56114659f131e95e227910d1f3b427d26360dca2af3ed821b71f8
 TALOSCTL_ASSET				:= talosctl-$(OS)-$(ARCH)
 TALOSCTL_DOWNLOAD_URL		:= https://github.com/$(TALOSCTL_REPOSITORY)/releases/download/$(TALOS_VERSION)/$(TALOSCTL_ASSET)
 TALOSCTL_BIN				:= $(BIN_DIR)/talosctl
